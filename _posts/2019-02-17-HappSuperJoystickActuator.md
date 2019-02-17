@@ -1,7 +1,7 @@
 ---
 layout: post
 title: "Happ Super joystick tighter 8-way actuator"
-categories: [arcade, make]
+categories: [arcade, making]
 image: happ.jpg
 ---
 
