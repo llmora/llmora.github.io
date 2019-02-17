@@ -1,6 +1,8 @@
 ---
 layout: post
 title: "PiArcade: All-in-one Raspberry Pi arcade controller"
+categories: [arcade, make]
+image: piarcade.jpg
 ---
 
 When I have friends over we regularly end up playing at the arcade cabinet and having a good laugh. For a while I have been tinkering with the idea of building a small self-contained Raspberry Pi powered arcade controller for them to take back home so that they can spread the arcade love :-)

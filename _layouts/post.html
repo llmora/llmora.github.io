@@ -15,3 +15,48 @@ layout: default
 
   {% include disqus.html %}
 </article>
+
+<div class="rect">
+  <h2>Related Posts</h2>
+
+  {% assign maxRelated = 4 %}
+  {% assign minCommonTags =  1 %}
+  {% assign maxRelatedCounter = 0 %}
+
+
+  {% for post in site.posts %}
+
+
+    {% assign sameTagCount = 0 %}
+    {% assign commonTags = '' %}
+
+    {% for category in post.categories %}
+      {% if post.url != page.url %}
+        {% if page.categories contains category %}
+          {% assign sameTagCount = sameTagCount | plus: 1 %}
+          {% capture tagmarkup %} <span class="label label-default">{{ tag }}</span> {% endcapture %}
+          {% assign commonTags = commonTags | append: tagmarkup %}
+        {% endif %}
+      {% endif %}
+    {% endfor %}
+
+    {% if sameTagCount >= minCommonTags %}
+      {% assign postImage = "logo.jpg" %}
+      {% if post.image != nil %}
+        {% assign postImage = post.image %}
+      {% endif %}
+
+          <a href="{{ site.baseurl }}{{ post.url }}">
+              <div class="rel">
+                  <img width="100%" src="{{ site.baseurl }}/images/thumbs-small/{{postImage}}">
+                  <h5>{{ post.title }}</h5>
+              </div>
+          </a>
+
+      {% assign maxRelatedCounter = maxRelatedCounter | plus: 1 %}
+      {% if maxRelatedCounter >= maxRelated %}
+        {% break %}
+      {% endif %}
+    {% endif %}
+  {% endfor %}
+</div>
