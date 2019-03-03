@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Installing a new IL Eurojoystick 2"
+title: "Installing a new Industrias Lorenzo Eurojoystick 2"
 categories: [arcade]
 image: eurojoystick2.jpg
 ---
