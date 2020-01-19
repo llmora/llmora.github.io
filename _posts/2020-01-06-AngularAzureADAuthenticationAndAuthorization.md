@@ -272,4 +272,4 @@ Integrating Azure AD authentication and authorisation against an angular applica
 
 In this article and the [accompanying code](https://github.com/llmora/azuread-angular-example) we have shown how to implement this integration, it should be fairly easy to adapt the approach to other web frameworks besides angular as we decided to integrate the Microsoft MSAL js library directly instead of the angular wrapper.
 
-If you have comments, questions or improvements to the article please reach out on Twitter or submit a pull request in GitHub.
+If you have comments, questions or improvements to the article please reach out on Twitter or [submit a pull request in GitHub](https://github.com/llmora/llmora.github.io/blob/master/_posts/2020-01-06-AngularAzureADAuthenticationAndAuthorization.md).
