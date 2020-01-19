@@ -1,11 +1,11 @@
 ---
 layout: post
-title: "Azure authentication and authorisation in Angular applications"
+title: "Azure AD authentication and authorisation in Angular applications"
 categories: [dev, security]
 image: angular.jpg
 ---
 
-**TBC Code, Fiddle**
+There is plenty of documentation on integrating javascript applications with Microsoft cloud authentication, however there is little information on how to define which users are allowed to log-in, managing them and assigning the roles your application uses to them using Azure AD. Read on to learn how to do an end-to-end integration of Angular, Azure AD and user+role management.
 
 I recently had the need to add cloud-based Microsoft authentication to an angular+rails application which uses role-based access control, including integrating authorization of users who are assigned roles directly in AzureAD. This removes the need for the application from having to manage users locally (urgh) and separates the management of the application from the management of its users (yey!).
 
@@ -18,7 +18,7 @@ To achieve this we will implement the following steps:
 * [Integrate AzureAD authentication with your application](#integrate-azuread-authentication-with-your-application)
 * [Access AzureAD JWT token and extract roles](#access-azuread-jwt-token-and-extract-roles)
 
-While there are plenty of articles and libraries that integrate angular and azure authentication, I did not find much information on using azure for user application role management, I hope you find this article and the accompanying code useful.
+While there are plenty of articles and libraries that integrate angular and azure authentication, I did not find much information on using azure for user application role management, I hope you find this article and the [accompanying code](https://github.com/llmora/azuread-angular-example) useful.
 
 ## Register your application with Azure
 
@@ -34,11 +34,13 @@ The information required during registration is quite straight-forward, but here
 
 * __Name__: a descriptive name that will be used to refer to your application, we will use "testapp" throughout the article
 * __Supported account types__: select the scope of user accounts that you want authenticating against your application, either restricted to your own Office365 tenant, to other Office365 tenants or including personal accounts. For our application we will go with "Single tenant"
-* __Redirect URI__: leave blank for the time being - it is used to support the "redirect" method which we will cover later on
+* __Redirect URI__: enter the URL that your users will be clicking on the 'Login with Microsoft' button
 
 After submitting the registration form, we will be provided with two of the key values we need to configure Azure authentication in our application, the "Client ID" (which identified our application to Azure) and the "Tenant ID" (a common ID which tells Azure which organisation to authenticate against). Write down these values as we will need to use them later on.
 
 [ ![]({{ site.baseurl }}/images/azuread_appdetails.png "Application details after registration")]({{ site.baseurl }}/images/azuread_appdetails.png)
+
+For our application we will be using the OAuth 2.0 Implicit Grant flow, as we need to access the ID tokens directly. After registering the application, we will click on 'testapp' and then select 'Authentication' from the left-side menu, scroll down to 'Implicit grant', tick the 'ID tokens' checkbox and then save so that the application is updated.
 
 ### Define application roles
 
@@ -63,7 +65,7 @@ Microsoft provides some [documentation around the definition of application role
 
 In our case let's assume we have an 'admin' role which allows users to manage the application, our `appRole` would be filled-in with this information:
 
-```
+```js
 {
   "allowedMemberTypes": [
     "User"
@@ -78,7 +80,7 @@ In our case let's assume we have an 'admin' role which allows users to manage th
 
 Just add as many roles as you require to the JSON file as a list of items assigned to `appRoles`, your file should look similar to this:
 
-```
+```json
 "appRoles": [
 {
   "allowedMemberTypes": [
@@ -139,20 +141,20 @@ The MSAL workflow is quite simple:
 
 Start by installing the MSAL js library:
 
-```
+```bash
 $ npm install @azure/msal
 ```
 
 In the initialisation of our login component we will obtain a `UserAgentApplication` instance:
 
-```
+```js
   var msalConfig: Configuration = {
     auth: {
       clientId: 'abcdef-0123-456789ab-cdef-012345' // AAD Client ID
     },
 
     system: {
-      logger: this.azureLogger // This easies MSAL debugging, check the accompanying code for details on this property
+      logger: this.azureLogger // This easies MSAL debugging, check the [accompanying code](https://github.com/llmora/azuread-angular-example) for details on this property
     }
   };
 
@@ -170,11 +172,11 @@ When the user decides to authenticate through Azure we have two integration opti
   * A pop-up that, after authentication, closes down and sends the results of authentication to our client-side application
   * A redirect to Microsoft which, after authentication, redirects back to one of the URIs we have configured when registering the application
 
-After some testing I opted for the pop-up integration due to it being easier to integrate (it requires less configuration, e.g. no redirect URI to configure) and the impossibility to include a hash in the return URI of an AzureAD application, which makes it [impossible to use it with angular if you are using a `HashLocationStrategy`](https://github.com/AzureAD/microsoft-authentication-library-for-js/issues/782) (e.g. the angular paths separated with hashes, for instance `/#/login`). If you want to use redirect either ensure you are using `PathLocationStrategy` or use a static HTML served outside of your angular application, as described in [this GitHub issue](https://github.com/AzureAD/azure-activedirectory-library-for-js/issues/100) and configure that path in the 'Redirect URI' of your application registration.
+After some testing I opted for the pop-up integration due to it being easier to integrate (it requires less configuration, e.g. no redirect page to receive the response) and the impossibility to include a hash in the return URI of an AzureAD application, which makes it [impossible to use it with angular if you are using a `HashLocationStrategy`](https://github.com/AzureAD/microsoft-authentication-library-for-js/issues/782) (e.g. the angular paths separated with hashes, for instance `/#/login`). If you want to use redirect either ensure you are using `PathLocationStrategy` or use a static HTML served outside of your angular application, as described in [this GitHub issue](https://github.com/AzureAD/azure-activedirectory-library-for-js/issues/100) and configure that path in the 'Redirect URI' of your application registration.
 
 Going with the pop-up option is quite simple, just bind this code to the action which executes when the user selects to authenticate through Microsoft:
 
-```
+```js
 var loginRequest = {
   scopes: ['user.read']
 };
@@ -200,20 +202,31 @@ While developing with MSAL it can be a bit daunting to troubleshoot, these are s
   * Make sure your client and tenant IDs are correct
   * If you are configuring the application for single-tenant you need to include the tenant ID in the authority URL
   * If you are using the redirect option, during development you will probably be using "localhost" as your landing page. Note that localhost and 127.0.0.1 are not the same as far as return pages are concerned (your application will work, but you will not receive the token back from Azure)
+  * If you are getting an AADSTS700054 error ("response_type 'id_token' is not enabled for the application") make sure you have selected the 'ID token' implicit grant, as described in the last step of [Register your application with Azure](#register-your-application-with-azure)
+  * The first time you login to the application, an admin must consent for it to be authenticating against your AzureAD instance. Make sure an admin is the first one to login, and that they check the 'Consent on behalf of your organisation' when prompted:
 
-MSAL offers a logger that is quite verbose about the errors it encounters, if you are facing issues I strongly recommend you use the logger - see the `UserAgentApplication` instance initialisation in the accompanying code for more details.
+  [ ![]({{ site.baseurl }}/images/azuread_appconsent.png "Admin consent")]({{ site.baseurl }}/images/azuread_appconsent.png)
+
+
+MSAL offers a logger that is quite verbose about the errors it encounters, if you are facing issues I strongly recommend you use the logger - see the `UserAgentApplication` instance initialisation in the [accompanying code](https://github.com/llmora/azuread-angular-example) for more details.
 
 ## Access AzureAD JWT token and extract roles
 
 After a successful login we will receive a JWT token which encodes the details of the authenticated user as well as the roles she has assigned. Use the getAccount() method of the MSAL object to retrieve the authenticated user e-mail:
 
-```
+```js
 var azureAccount = this.azureADmsalInstance.getAccount();
 ```
 
-Retrieving the JWT token is slightly more complicated, as MSAL does not expose the raw idToken but stores it in the sessionStorage - this is the key to accessing roles as these are not exposed by MSAL directly:
+Retrieving the JWT token is even easier, as MSAL sets a 'idToken' in the response - this is the key to accessing roles as these are not exposed by MSAL directly:
 
+```js
+var idToken = response.idToken
 ```
+
+If for whatever reason you need to use an older version of MSAL, please note that the idToken was not exposed in the response but could be extracted from the sessionStorage:
+
+```js
 var idToken = window.sessionStorage.getItem(Constants.idTokenKey)
 ```
 
@@ -226,11 +239,11 @@ var idToken = window.sessionStorage.getItem(Constants.idTokenKey)
   *preferred_username*: User e-mail
   *roles*: List of application roles the user has assigned
 
-The roles entry is a list of role strings (the `value` we gave to the relevant `apRoles` in the manifest) which you can then use directly in the application to authorise the user actions.
+The roles entry is a list of role strings (the `value` we gave to the relevant `appRoles` in the manifest) which you can then use directly in the application to authorise the user actions.
 
-Below is a ruby implementation which extracts the user e-mail and roles from the JWT token using the AzureActiveDirectory class (which does most of the heavy-lifting):
+Below is a ruby implementation which extracts the user e-mail and roles from the JWT token using the [AzureActiveDirectory class](https://github.com/AzureAD/omniauth-azure-activedirectory/blob/master/lib/omniauth/strategies/azure_activedirectory.rb) (which does most of the heavy-lifting):
 
-```
+```ruby
 aad = AzureActiveDirectory.new(client_id, tenant_id)
 
 # Verify signature, issuer and audience
@@ -257,6 +270,6 @@ Integrating Azure AD authentication and authorisation against an angular applica
   * Assigning roles to users in Azure
   * Extracting the application roles from the Azure JWT idToken
 
-In this article and the accompanying code we have shown how to implement this integration, it should be fairly easy to adapt the approach to other web frameworks besides angular as we decided to integrate the Microsoft MSAL js library directly instead of the angular wrapper.
+In this article and the [accompanying code](https://github.com/llmora/azuread-angular-example) we have shown how to implement this integration, it should be fairly easy to adapt the approach to other web frameworks besides angular as we decided to integrate the Microsoft MSAL js library directly instead of the angular wrapper.
 
 If you have comments, questions or improvements to the article please reach out on Twitter or submit a pull request in GitHub.
