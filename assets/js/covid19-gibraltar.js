@@ -46,7 +46,8 @@ var series =
       5,
       4,
       2,
-      5
+      5,
+      10
     ],
     "recovered": [
       0,
@@ -93,9 +94,11 @@ var series =
       127,
       129,
       131,
+      131,
       131
     ],
     "deceased": [
+      0,
       0,
       0,
       0,
@@ -187,7 +190,8 @@ var series =
       78,
       76,
       74,
-      113
+      113,
+      82
     ],
     "tests_received": [
       42,
@@ -234,7 +238,8 @@ var series =
       1942,
       1986,
       2031,
-      2061
+      2061,
+      2116
     ],
     "dates": [
       "12 March 2020 GMT",
@@ -281,7 +286,8 @@ var series =
       "22 April 2020 GMT",
       "23 April 2020 GMT",
       "24 April 2020 GMT",
-      "25 April 2020 GMT"
+      "25 April 2020 GMT",
+      "26 April 2020 GMT"
     ]
   }
 }
