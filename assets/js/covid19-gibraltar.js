@@ -423,7 +423,7 @@ var series = {
       "15 May 2020 GMT",
       "16 May 2020 GMT",
       "17 May 2020 GMT",
-      "18 May 2020 GMT",
+      "18 May 2020 GMT" ,
       "19 May 2020 GMT"
     ]
   }
