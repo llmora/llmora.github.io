@@ -69,7 +69,8 @@ var series = {
       2,
       2,
       2,
-      2
+      2,
+      4
     ],
     "recovered": [
       0,
@@ -140,9 +141,11 @@ var series = {
       145,
       145,
       145,
+      145,
       145
     ],
     "deceased": [
+      0,
       0,
       0,
       0,
@@ -282,7 +285,8 @@ var series = {
       182,
       166,
       9,
-      126
+      126,
+      205
     ],
     "tests_received": [
       42,
@@ -353,7 +357,8 @@ var series = {
       4878,
       4990,
       5178,
-      5284
+      5284,
+      5410
     ],
     "dates": [
       "12 March 2020 GMT",
@@ -424,7 +429,8 @@ var series = {
       "16 May 2020 GMT",
       "17 May 2020 GMT",
       "18 May 2020 GMT",
-      "19 May 2020 GMT"
+      "19 May 2020 GMT",
+      "20 May 2020 GMT"
     ]
   }
 }
