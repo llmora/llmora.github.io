@@ -1,4 +1,5 @@
-var series = {
+var series = 
+{
   "covid19GibraltarSeries": {
     "active": [
       1,
@@ -66,7 +67,6 @@ var series = {
       3,
       3,
       3,
-      2,
       2,
       2,
       2
@@ -139,11 +139,9 @@ var series = {
       144,
       145,
       145,
-      145,
       145
     ],
     "deceased": [
-      0,
       0,
       0,
       0,
@@ -281,8 +279,7 @@ var series = {
       252,
       182,
       166,
-      9,
-      126
+      9
     ],
     "tests_received": [
       42,
@@ -352,8 +349,7 @@ var series = {
       4689,
       4878,
       4990,
-      5178,
-      5284
+      5178
     ],
     "dates": [
       "12 March 2020 GMT",
@@ -423,8 +419,8 @@ var series = {
       "15 May 2020 GMT",
       "16 May 2020 GMT",
       "17 May 2020 GMT",
-      "18 May 2020 GMT" ,
-      "19 May 2020 GMT"
+      "18 May 2020 GMT"
     ]
   }
 }
+
