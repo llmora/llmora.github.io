@@ -93,6 +93,7 @@ var series = {
       7,
       5,
       4,
+      3,
       3
     ],
     "recovered": [
@@ -188,9 +189,11 @@ var series = {
       169,
       171,
       172,
+      173,
       173
     ],
     "deceased": [
+      0,
       0,
       0,
       0,
@@ -378,7 +381,8 @@ var series = {
       46,
       58,
       28,
-      34
+      34,
+      13
     ],
     "tests_received": [
       42,
@@ -473,7 +477,8 @@ var series = {
       9462,
       9651,
       9886,
-      10057
+      10057,
+      10091
     ],
     "dates": [
       "12 March 2020 GMT",
@@ -568,7 +573,8 @@ var series = {
       "10 June 2020 GMT",
       "11 June 2020 GMT",
       "12 June 2020 GMT",
-      "13 June 2020 GMT"
+      "13 June 2020 GMT",
+      "14 June 2020 GMT"
     ]
   }
 }
