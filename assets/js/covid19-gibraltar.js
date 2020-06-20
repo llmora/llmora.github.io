@@ -405,8 +405,8 @@ var series = {
       3,
       21,
       14,
-      27,
-      17
+      17,
+      27
     ],
     "tests_received": [
       42,
@@ -507,8 +507,8 @@ var series = {
       10269,
       10558,
       10414,
-      10929,
-      10717
+      10717,
+      10929
     ],
     "dates": [
       "12 March 2020 GMT",
@@ -609,8 +609,8 @@ var series = {
       "16 June 2020 GMT",
       "18 June 2020 GMT",
       "17 June 2020 GMT",
-      "20 June 2020 GMT",
-      "19 June 2020 GMT"
+      "19 June 2020 GMT",
+      "20 June 2020 GMT"
     ]
   }
 }
