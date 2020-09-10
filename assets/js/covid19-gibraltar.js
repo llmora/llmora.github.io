@@ -686,7 +686,7 @@ var series = {
       19,
       104,
       5,
-      3,
+      3
     ],
     "tests_received": [
       42,
