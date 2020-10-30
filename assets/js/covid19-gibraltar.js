@@ -229,7 +229,8 @@ var series = {
       138,
       132,
       120,
-      104
+      104,
+      103
     ],
     "recovered": [
       0,
@@ -460,9 +461,11 @@ var series = {
       532,
       547,
       562,
-      584
+      584,
+      590
     ],
     "deceased": [
+      0,
       0,
       0,
       0,
@@ -922,7 +925,8 @@ var series = {
       5,
       60,
       6,
-      6
+      6,
+      24
     ],
     "tests_received": [
       42,
@@ -1153,7 +1157,8 @@ var series = {
       62264,
       63053,
       63754,
-      64458
+      64458,
+      65421
     ],
     "selfisolated": [
       0,
@@ -1356,6 +1361,7 @@ var series = {
       292,
       419,
       475,
+      null,
       null,
       null,
       null,
@@ -1615,7 +1621,8 @@ var series = {
       "26 October 2020 GMT",
       "27 October 2020 GMT",
       "28 October 2020 GMT",
-      "29 October 2020 GMT"
+      "29 October 2020 GMT",
+      "30 October 2020 GMT"
     ]
   }
 }
