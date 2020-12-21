@@ -281,7 +281,8 @@ var series = {
       103,
       130,
       153,
-      179
+      179,
+      213
     ],
     "recovered": [
       0,
@@ -564,7 +565,8 @@ var series = {
       1050,
       1054,
       1058,
-      1065
+      1065,
+      1069
     ],
     "deceased": [
       0,
@@ -841,6 +843,7 @@ var series = {
       5,
       5,
       5,
+      6,
       6,
       6,
       6,
@@ -1130,7 +1133,8 @@ var series = {
       29,
       24,
       61,
-      27
+      27,
+      58
     ],
     "tests_received": [
       42,
@@ -1413,7 +1417,8 @@ var series = {
       106168,
       107362,
       108611,
-      109084
+      109084,
+      109524
     ],
     "selfisolated": [
       0,
@@ -1696,7 +1701,8 @@ var series = {
       650,
       753,
       1004,
-      1027
+      1027,
+      1349
     ],
     "dates": [
       "12 March 2020 GMT",
@@ -1979,7 +1985,8 @@ var series = {
       "17 December 2020 GMT",
       "18 December 2020 GMT",
       "19 December 2020 GMT",
-      "20 December 2020 GMT"
+      "20 December 2020 GMT",
+      "21 December 2020 GMT"
     ]
   }
 }
