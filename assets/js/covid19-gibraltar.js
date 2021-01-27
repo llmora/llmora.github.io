@@ -2245,7 +2245,7 @@ var series = {
       9807,
       10341,
       10539,
-      0
+      null
     ],
     "doses_second": [
       0,
@@ -2566,7 +2566,7 @@ var series = {
       0,
       0,
       0,
-      0
+      null
     ],
     "doses_administered": [
       0,
@@ -2887,7 +2887,7 @@ var series = {
       9807,
       10341,
       10539,
-      0
+      null
     ],
     "dates": [
       "12 March 2020 GMT",
