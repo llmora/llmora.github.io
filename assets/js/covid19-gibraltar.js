@@ -2441,7 +2441,7 @@ var series = {
       0,
       0,
       0,
-      0
+      15444
     ],
     "doses_first": [
       0,
