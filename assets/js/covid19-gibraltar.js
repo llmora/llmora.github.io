@@ -347,7 +347,8 @@ var series = {
       41,
       38,
       30,
-      28
+      28,
+      24
     ],
     "recovered": [
       0,
@@ -696,7 +697,8 @@ var series = {
       4097,
       4103,
       4113,
-      4115
+      4115,
+      4119
     ],
     "deceased": [
       0,
@@ -1045,7 +1047,8 @@ var series = {
       90,
       91,
       91,
-      91
+      91,
+      92
     ],
     "tests_pending": [
       7,
@@ -1394,7 +1397,8 @@ var series = {
       25,
       25,
       42,
-      37
+      37,
+      50
     ],
     "tests_received": [
       42,
@@ -1743,7 +1747,8 @@ var series = {
       180349,
       180794,
       182192,
-      183424
+      183424,
+      184299
     ],
     "selfisolated": [
       0,
@@ -2092,7 +2097,8 @@ var series = {
       81,
       69,
       66,
-      65
+      65,
+      86
     ],
     "doses_shipments": [
       0,
@@ -2441,7 +2447,8 @@ var series = {
       0,
       0,
       0,
-      15444
+      15444,
+      0
     ],
     "doses_first": [
       0,
@@ -2790,7 +2797,8 @@ var series = {
       16761,
       17826,
       18902,
-      19859
+      19859,
+      20443
     ],
     "doses_second": [
       0,
@@ -3139,7 +3147,8 @@ var series = {
       12573,
       12606,
       12729,
-      12846
+      12846,
+      12928
     ],
     "doses_administered": [
       0,
@@ -3488,7 +3497,8 @@ var series = {
       29334,
       30432,
       31631,
-      32705
+      32705,
+      33371
     ],
     "dates": [
       "12 March 2020 GMT",
@@ -3837,7 +3847,8 @@ var series = {
       "21 February 2021 GMT",
       "22 February 2021 GMT",
       "23 February 2021 GMT",
-      "24 February 2021 GMT"
+      "24 February 2021 GMT",
+      "25 February 2021 GMT"
     ]
   }
 }
