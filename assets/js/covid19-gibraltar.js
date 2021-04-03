@@ -384,8 +384,8 @@ var series = {
       13,
       12,
       12,
-      null,
-      null
+      12,
+      12
     ],
     "recovered": [
       0,
@@ -771,8 +771,8 @@ var series = {
       4167,
       4168,
       4169,
-      null,
-      null
+      4169,
+      4169
     ],
     "deceased": [
       0,
@@ -1158,8 +1158,8 @@ var series = {
       94,
       94,
       94,
-      null,
-      null
+      94,
+      94
     ],
     "tests_pending": [
       7,
@@ -1545,8 +1545,8 @@ var series = {
       37,
       35,
       44,
-      null,
-      null
+      31,
+      30
     ],
     "tests_received": [
       42,
@@ -1932,8 +1932,8 @@ var series = {
       212268,
       213145,
       213823,
-      null,
-      null
+      214523,
+      214702
     ],
     "selfisolated": [
       0,
@@ -2319,8 +2319,8 @@ var series = {
       51,
       57,
       45,
-      null,
-      null
+      49,
+      45
     ],
     "doses_shipments": [
       0,
