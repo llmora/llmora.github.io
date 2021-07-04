@@ -93,7 +93,7 @@ There are a couple of interesting markings on the PCB:
 
 But that is about it, apart from a bunch of capacitors and resistors there appears to be only two active components:
 
-  * **An SMD oscillator**: likely a 32.768KHz clock as used in real-time clock applications. I scratched the markings when removing the resin, so I was unable to find the datasheet, markings seem to be CBxx6. If you have an idea of the actual markings drop me a line please.
+  * **An SMD oscillator**: likely a 32.768KHz clock as used in real-time clock applications - markings on my oscillator are CB701, no datasheet identified.
 
   * **An epoxy blob** which seems to cover the MCU that drives the token.
 
