@@ -3540,7 +3540,7 @@ var series = {
       0,
       0,
       null,
-      null
+      0
     ],
     "doses_first": [
       0,
@@ -4046,7 +4046,7 @@ var series = {
       39329,
       39334,
       null,
-      null
+      39340
     ],
     "doses_second": [
       0,
@@ -4552,7 +4552,7 @@ var series = {
       39077,
       39106,
       null,
-      null
+      39119
     ],
     "doses_administered": [
       0,
@@ -5058,7 +5058,7 @@ var series = {
       78406,
       78440,
       null,
-      null
+      78459
     ],
     "dates": [
       "12 March 2020 GMT",
