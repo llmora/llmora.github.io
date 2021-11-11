@@ -605,7 +605,8 @@ var series = {
       233,
       225,
       263,
-      282
+      282,
+      353
     ],
     "recovered": [
       0,
@@ -1212,7 +1213,8 @@ var series = {
       5822,
       5845,
       5845,
-      5876
+      5876,
+      5877
     ],
     "deceased": [
       0,
@@ -1793,6 +1795,7 @@ var series = {
       97,
       97,
       97,
+      98,
       98,
       98,
       98,
@@ -2426,7 +2429,8 @@ var series = {
       44,
       45,
       44,
-      73
+      73,
+      54
     ],
     "tests_received": [
       42,
@@ -3033,7 +3037,8 @@ var series = {
       391764,
       392250,
       393479,
-      394655
+      394655,
+      395986
     ],
     "selfisolated": [
       0,
@@ -3640,7 +3645,8 @@ var series = {
       294,
       270,
       299,
-      322
+      322,
+      404
     ],
     "doses_shipments": [
       0,
@@ -4232,6 +4238,7 @@ var series = {
       0,
       0,
       0,
+      null,
       null,
       null,
       null,
@@ -4854,6 +4861,7 @@ var series = {
       null,
       null,
       null,
+      null,
       null
     ],
     "doses_second": [
@@ -5446,6 +5454,7 @@ var series = {
       39803,
       39803,
       39803,
+      null,
       null,
       null,
       null,
@@ -6659,6 +6668,7 @@ var series = {
       null,
       null,
       null,
+      null,
       null
     ],
     "dates": [
@@ -7266,7 +7276,8 @@ var series = {
       "07 November 2021 GMT",
       "08 November 2021 GMT",
       "09 November 2021 GMT",
-      "10 November 2021 GMT"
+      "10 November 2021 GMT",
+      "11 November 2021 GMT"
     ]
   }
 }
