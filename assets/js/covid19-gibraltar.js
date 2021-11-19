@@ -4299,11 +4299,11 @@ var series = {
       0,
       0,
       0,
-      null,
-      null,
-      null,
-      null,
-      null
+      0,
+      0,
+      0,
+      0,
+      0
     ],
     "doses_first": [
       0,
@@ -4914,11 +4914,11 @@ var series = {
       40578,
       40763,
       40764,
-      null,
-      null,
-      null,
-      null,
-      null
+      40786,
+      40786,
+      40787,
+      40787,
+      40787
     ],
     "doses_second": [
       0,
@@ -5529,11 +5529,11 @@ var series = {
       39814,
       39813,
       39813,
-      null,
-      null,
-      null,
-      null,
-      null
+      39815,
+      39815,
+      39815,
+      39815,
+      39815
     ],
     "doses_booster": [
       0,
@@ -6144,11 +6144,11 @@ var series = {
       11865,
       12172,
       12440,
-      null,
-      null,
-      null,
-      null,
-      null
+      13324,
+      13325,
+      13773,
+      14241,
+      14711
     ],
     "doses_third": [
       0,
@@ -6759,11 +6759,11 @@ var series = {
       0,
       0,
       0,
-      null,
-      null,
-      null,
-      null,
-      null
+      94,
+      94,
+      94,
+      94,
+      94
     ],
     "doses_administered": [
       0,
@@ -7374,11 +7374,11 @@ var series = {
       92257,
       92748,
       93017,
-      null,
-      null,
-      null,
-      null,
-      null
+      94019,
+      94020,
+      94469,
+      94937,
+      95407
     ],
     "dates": [
       "12 March 2020 GMT",
