@@ -630,7 +630,8 @@ var series = {
       404,
       393,
       359,
-      317
+      317,
+      285
     ],
     "recovered": [
       0,
@@ -1262,7 +1263,8 @@ var series = {
       6822,
       6848,
       6902,
-      6955
+      6955,
+      6991
     ],
     "deceased": [
       0,
@@ -1894,7 +1896,8 @@ var series = {
       98,
       99,
       99,
-      99
+      99,
+      100
     ],
     "tests_pending": [
       7,
@@ -2526,6 +2529,7 @@ var series = {
       89,
       88,
       92,
+      88,
       88
     ],
     "tests_received": [
@@ -3158,7 +3162,8 @@ var series = {
       418360,
       419565,
       420602,
-      421161
+      421161,
+      421688
     ],
     "selfisolated": [
       0,
@@ -3790,7 +3795,8 @@ var series = {
       450,
       439,
       410,
-      367
+      367,
+      327
     ],
     "doses_shipments": [
       0,
@@ -4422,7 +4428,8 @@ var series = {
       0,
       0,
       null,
-      null
+      null,
+      0
     ],
     "doses_first": [
       0,
@@ -5054,7 +5061,8 @@ var series = {
       40944,
       40995,
       null,
-      null
+      null,
+      41002
     ],
     "doses_second": [
       0,
@@ -5686,7 +5694,8 @@ var series = {
       39820,
       39823,
       null,
-      null
+      null,
+      39840
     ],
     "doses_booster": [
       0,
@@ -6318,7 +6327,8 @@ var series = {
       18169,
       18837,
       null,
-      null
+      null,
+      19460
     ],
     "doses_third": [
       0,
@@ -6950,7 +6960,8 @@ var series = {
       94,
       94,
       null,
-      null
+      null,
+      94
     ],
     "doses_administered": [
       0,
@@ -7582,7 +7593,8 @@ var series = {
       99027,
       99749,
       null,
-      null
+      null,
+      100396
     ],
     "dates": [
       "12 March 2020 GMT",
@@ -8214,7 +8226,8 @@ var series = {
       "02 December 2021 GMT",
       "03 December 2021 GMT",
       "04 December 2021 GMT",
-      "05 December 2021 GMT"
+      "05 December 2021 GMT",
+      "06 December 2021 GMT"
     ]
   }
 }
