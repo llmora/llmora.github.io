@@ -685,7 +685,8 @@ var series = {
       1548,
       1591,
       1672,
-      1433
+      1433,
+      1358
     ],
     "recovered": [
       0,
@@ -1372,7 +1373,8 @@ var series = {
       10629,
       10750,
       10838,
-      11219
+      11219,
+      11390
     ],
     "deceased": [
       0,
@@ -2005,6 +2007,7 @@ var series = {
       99,
       99,
       99,
+      100,
       100,
       100,
       100,
@@ -2746,7 +2749,8 @@ var series = {
       188,
       209,
       190,
-      253
+      253,
+      204
     ],
     "tests_received": [
       42,
@@ -3433,7 +3437,8 @@ var series = {
       483508,
       484966,
       486415,
-      487547
+      487547,
+      488311
     ],
     "selfisolated": [
       0,
@@ -4120,7 +4125,8 @@ var series = {
       1570,
       1614,
       1701,
-      1466
+      1466,
+      1379
     ],
     "doses_shipments": [
       0,
@@ -4807,7 +4813,8 @@ var series = {
       0,
       0,
       0,
-      null
+      null,
+      0
     ],
     "doses_first": [
       0,
@@ -5494,7 +5501,8 @@ var series = {
       41344,
       41343,
       41352,
-      null
+      null,
+      41356
     ],
     "doses_second": [
       0,
@@ -6181,7 +6189,8 @@ var series = {
       40681,
       40696,
       40712,
-      null
+      null,
+      40722
     ],
     "doses_booster": [
       0,
@@ -6868,7 +6877,8 @@ var series = {
       28538,
       28665,
       28787,
-      null
+      null,
+      28883
     ],
     "doses_third": [
       0,
@@ -7555,7 +7565,8 @@ var series = {
       139,
       139,
       140,
-      null
+      null,
+      140
     ],
     "doses_administered": [
       0,
@@ -8242,7 +8253,8 @@ var series = {
       110702,
       110843,
       110991,
-      null
+      null,
+      111101
     ],
     "dates": [
       "12 March 2020 GMT",
@@ -8929,7 +8941,8 @@ var series = {
       "26 January 2022 GMT",
       "27 January 2022 GMT",
       "28 January 2022 GMT",
-      "29 January 2022 GMT"
+      "29 January 2022 GMT",
+      "30 January 2022 GMT"
     ]
   }
 }
