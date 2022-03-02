@@ -709,7 +709,8 @@ var series = {
       666,
       613,
       495,
-      501
+      501,
+      499
     ],
     "recovered": [
       0,
@@ -1420,7 +1421,8 @@ var series = {
       14489,
       14599,
       14832,
-      14886
+      14886,
+      14926
     ],
     "deceased": [
       0,
@@ -2109,6 +2111,7 @@ var series = {
       100,
       100,
       100,
+      101,
       101,
       101,
       101,
@@ -2842,7 +2845,8 @@ var series = {
       221,
       193,
       198,
-      238
+      238,
+      246
     ],
     "tests_received": [
       42,
@@ -3553,7 +3557,8 @@ var series = {
       512136,
       512925,
       514407,
-      515319
+      515319,
+      516197
     ],
     "selfisolated": [
       0,
@@ -4264,7 +4269,8 @@ var series = {
       682,
       608,
       497,
-      505
+      505,
+      506
     ],
     "doses_shipments": [
       0,
@@ -4956,6 +4962,7 @@ var series = {
       0,
       0,
       0,
+      null,
       null,
       null,
       null,
@@ -5686,6 +5693,7 @@ var series = {
       null,
       null,
       null,
+      null,
       null
     ],
     "doses_second": [
@@ -6378,6 +6386,7 @@ var series = {
       40722,
       40737,
       40742,
+      null,
       null,
       null,
       null,
@@ -7108,6 +7117,7 @@ var series = {
       null,
       null,
       null,
+      null,
       null
     ],
     "doses_third": [
@@ -7800,6 +7810,7 @@ var series = {
       140,
       140,
       140,
+      null,
       null,
       null,
       null,
@@ -8530,6 +8541,7 @@ var series = {
       null,
       null,
       null,
+      null,
       null
     ],
     "dates": [
@@ -9241,7 +9253,8 @@ var series = {
       "24 February 2022 GMT",
       "25 February 2022 GMT",
       "28 February 2022 GMT",
-      "01 March 2022 GMT"
+      "01 March 2022 GMT",
+      "02 March 2022 GMT"
     ]
   }
 }
