@@ -155,8 +155,6 @@ var RoleCellRenderer = function () {
 
   _createClass(RoleCellRenderer, [{
     key: "init",
-
-    // init method gets the details of the cell to be renderer
     value: function init(params) {
 
       var roleLink = params.value.toLowerCase().replace(new RegExp(/\s+/gi), "-");
@@ -205,7 +203,7 @@ var Roles = function (_React$Component2) {
 
         this.state.columnApi.autoSizeColumns(allColumnIds);
 
-        var defaultSortModel = [{ colId: 'years_learning', sort: 'desc', sortIndex: 0 }, { colId: 'years_in_role', sort: 'desc', sortIndex: 1 }];
+        var defaultSortModel = [{ colId: 'years', sort: 'asc', sortIndex: 0 }];
 
         this.state.columnApi.applyColumnState({ state: defaultSortModel });
       }
@@ -220,20 +218,17 @@ var Roles = function (_React$Component2) {
       this.setState({ columnApi: params.columnApi });
     }
   }, {
-    key: "roleNameRenderer",
-    value: function roleNameRenderer(params) {
-      return "<span>" + params.value + "</span>";
+    key: "yearsCellRenderer",
+    value: function yearsCellRenderer(params) {
+      return params.data.years_learning + " years learning + " + params.data.years_working + " years working ";
     }
   }, {
     key: "render",
     value: function render() {
       var columnDefinitions = [{ field: "name", headerName: "Role", cellRenderer: RoleCellRenderer }, { field: "path" }, {
-        field: "years_learning",
-        headerName: "Learning time",
-        initialWidth: 100
-      }, {
-        field: "years_working",
-        headerName: "Working time to USD 1M",
+        field: "years",
+        cellRenderer: this.yearsCellRenderer,
+        headerName: "Time to make USD 1M",
         initialWidth: 100
       }, { field: "risk", headerName: "Risk of failure" }, { field: "fun", headerName: "Fun level" }, { field: "life", headerName: "Life balance" }];
 
@@ -253,8 +248,9 @@ var Roles = function (_React$Component2) {
           var roleData = {
             name: role.name,
             path: role.path,
-            years_learning: role.years_learning + " years",
-            years_working: role.years_in_role + " years",
+            years_learning: role.years_learning,
+            years_working: role.years_in_role,
+            years: role.years_learning + role.years_in_role,
             risk: role.risk,
             fun: role.fun,
             life: role.life

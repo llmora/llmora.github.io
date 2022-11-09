@@ -252,7 +252,7 @@ class RoleMatrix extends React.Component {
 }
 
 class RoleCellRenderer {
-  // init method gets the details of the cell to be renderer
+
   init(params) {
 
     let roleLink = params.value
@@ -291,8 +291,7 @@ class Roles extends React.Component {
       this.state.columnApi.autoSizeColumns(allColumnIds);
   
       var defaultSortModel = [
-        { colId: 'years_learning', sort: 'desc', sortIndex: 0 },
-        { colId: 'years_in_role', sort: 'desc', sortIndex: 1 },
+        { colId: 'years', sort: 'asc', sortIndex: 0 },
       ];
   
       this.state.columnApi.applyColumnState({ state: defaultSortModel });
@@ -310,8 +309,8 @@ class Roles extends React.Component {
 
   }
 
-  roleNameRenderer(params) {
-    return `<span>${params.value}</span>`;
+  yearsCellRenderer(params) {
+    return `${params.data.years_learning} years learning + ${params.data.years_working} years working `;
   }
 
   render() {
@@ -319,13 +318,9 @@ class Roles extends React.Component {
       { field: "name", headerName: "Role", cellRenderer: RoleCellRenderer},
       { field: "path" },
       {
-        field: "years_learning",
-        headerName: "Learning time",
-        initialWidth: 100
-      },
-      {
-        field: "years_working",
-        headerName: "Working time to USD 1M",
+        field: "years",
+        cellRenderer: this.yearsCellRenderer,
+        headerName: "Time to make USD 1M",
         initialWidth: 100
       },
       { field: "risk", headerName: "Risk of failure" },
@@ -349,8 +344,9 @@ class Roles extends React.Component {
         let roleData = {
           name: role.name,
           path: role.path,
-          years_learning: `${role.years_learning} years`,
-          years_working: `${role.years_in_role} years`,
+          years_learning: role.years_learning,
+          years_working: role.years_in_role,
+          years: role.years_learning + role.years_in_role,
           risk: role.risk,
           fun: role.fun,
           life: role.life,
