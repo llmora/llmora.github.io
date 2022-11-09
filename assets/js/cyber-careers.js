@@ -55,13 +55,13 @@ var roles = [{
   skills: ["Forensic and experience handling critical incidents", "Develop software and contribute to open source", "Amazing understanding of how IT systems work", "Always up to date with latest developments"]
 }, {
   path: "Enterpreneur",
-  name: "Founder of a cybersecurity product startup",
+  name: "Founder of a cybersecurity startup",
   years_learning: 5,
   years_in_role: 5,
   risk: 9,
   fun: 6,
   life: 3,
-  description: ["Bringing a product to life that solves a problem you really care about, that will make the world a better place and that only you are capable of delivering. What could be more purposeful? It will take a few years to find the right product, convince people to share your views and -with a bit of luck and no shortage of struggles- you will come out successful on the other side. The majority of startups fail, so you are likely to spend quite a few years repurposing yourself, but with every failure there will be new learnings that get you closer to success. Being a founder is not for the faint of heart and requires a long-term investment, but it is certainly one of the more satisfying and lucrative ways to make it in cyber."],
+  description: ["Bringing a product to life that solves a problem you really care about, that will make the world a better place and that only you are capable of delivering. What could be more purposeful?", "It will take a few years to find the right product, convince people to share your views and -with a bit of luck and no shortage of struggles- you will come out successful on the other side. The majority of startups fail, so you are likely to spend quite a few years repurposing yourself, but with every failure there will be new learnings that get you closer to success.", "Being a founder is not for the faint of heart and requires a long-term investment, but it is certainly one of the more satisfying and lucrative ways to make it in cyber."],
   skills: ["Amazing understanding of the problem area you solve", "Amazing selling ability", "Networking", "Always up to date with latest developments", "Development knowledge", "Ability to attract investment and talent"]
 
 }, {
@@ -267,7 +267,11 @@ var Roles = function (_React$Component3) {
               React.createElement(
                 "a",
                 { href: "#" + roleLink },
-                role.name
+                React.createElement(
+                  "strong",
+                  null,
+                  role.name
+                )
               )
             ),
             React.createElement(
@@ -308,53 +312,81 @@ var Roles = function (_React$Component3) {
 
       return React.createElement(
         "table",
-        null,
+        { className: "table table-striped table-hover table-bordered" },
         React.createElement(
           "thead",
-          null,
+          { className: "table-dark" },
           React.createElement(
             "tr",
             null,
             React.createElement(
               "th",
               null,
-              "Role"
+              React.createElement(
+                "strong",
+                null,
+                "Role"
+              )
             ),
             React.createElement(
               "th",
               null,
-              "Path"
+              React.createElement(
+                "strong",
+                null,
+                "Path"
+              )
             ),
             React.createElement(
               "th",
               null,
-              "How long to acquire skills needed?"
+              React.createElement(
+                "strong",
+                null,
+                "How long to acquire skills needed?"
+              )
             ),
             React.createElement(
               "th",
               null,
-              "How quick to make $1M once you have skills?"
+              React.createElement(
+                "strong",
+                null,
+                "How quick to make $1M once you have skills?"
+              )
             ),
             React.createElement(
               "th",
               null,
-              "Risk of failure"
+              React.createElement(
+                "strong",
+                null,
+                "Risk of failure"
+              )
             ),
             React.createElement(
               "th",
               null,
-              "Fun"
+              React.createElement(
+                "strong",
+                null,
+                "Fun"
+              )
             ),
             React.createElement(
               "th",
               null,
-              "Life"
+              React.createElement(
+                "strong",
+                null,
+                "Life balance"
+              )
             )
           )
         ),
         React.createElement(
           "tbody",
-          null,
+          { className: "table-group-divider" },
           entries
         )
       );
@@ -402,7 +434,7 @@ var RoleArticle = function (_React$Component4) {
 
           return React.createElement(
             "div",
-            { key: idx },
+            { key: idx, className: "pt-3" },
             React.createElement(
               "h2",
               null,
@@ -414,6 +446,13 @@ var RoleArticle = function (_React$Component4) {
               "div",
               null,
               description
+            ),
+            React.createElement(
+              "div",
+              { className: "mb-3" },
+              "The following ",
+              rolesForPath.length > 1 ? rolesForPath.length + " roles follow" : "role follows",
+              " this path:"
             ),
             React.createElement(RolesForPath, { roles: rolesForPath })
           );
@@ -515,11 +554,24 @@ var PathRole = function (_React$Component6) {
               "b",
               null,
               role.name,
-              role.risk > 5 && React.createElement(
-                "i",
-                { className: "icon risk" },
-                "RISK_ICON"
-              )
+              React.createElement(
+                "span",
+                null,
+                " "
+              ),
+              role.risk > 5 && React.createElement("i", { className: "bi bi-exclamation-triangle-fill text-danger", title: "Very risky" }),
+              React.createElement(
+                "span",
+                null,
+                " "
+              ),
+              role.fun > 5 && React.createElement("i", { className: "bi bi-emoji-laughing-fill text-info", title: "Lots of fun" }),
+              React.createElement(
+                "span",
+                null,
+                " "
+              ),
+              role.life > 5 && React.createElement("i", { className: "bi bi-people-fill text-success", title: "Good life balance" })
             )
           )
         ),
