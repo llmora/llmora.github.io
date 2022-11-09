@@ -297,7 +297,6 @@ class Roles extends React.Component {
       this.state.columnApi.applyColumnState({ state: defaultSortModel });
   
     }
-
   }
 
   onGridReady(params) {

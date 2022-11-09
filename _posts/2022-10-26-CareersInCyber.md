@@ -2,7 +2,7 @@
 layout: post
 title: "Making it in cybersecurity"
 categories: [security]
-image: security.jpg
+image: success.png
 ---
 
 What's the fastest / funniest / more satisfying / less risky way to make a career in cybersecurity? Every now and then I get asked by colleagues starting in information security what is the best area for them to focus on; this article summarises my views on choosing a successful career in cybersecurity.
