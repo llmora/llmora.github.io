@@ -1,13 +1,13 @@
 ---
 layout: post
-title: "Making it in cyber"
+title: "Making it in cybersecurity"
 categories: [security]
 image: security.jpg
 ---
 
-What's the fastest / funniest / more satisfying / less risky way to make a career in cybersecurity? Every now and then I get asked by colleagues starting in Cyber what is the best area for them to focus on; this article summarises my views on choosing a successful career in cyber.
+What's the fastest / funniest / more satisfying / less risky way to make a career in cybersecurity? Every now and then I get asked by colleagues starting in information security what is the best area for them to focus on; this article summarises my views on choosing a successful career in cybersecurity.
 
-My default answer is to go for the area that you enjoy the most and where you think you can put your skills to work: is it attack or defence skills, compliance work, application security, product visionary... ? This post discusses some of the available paths and roles within those paths to be able to make a living out of Cybersecurity.
+My default answer is to go for the area that you enjoy the most and where you think you can put your skills to work: is it attack or defence skills, compliance work, application security, product visionary... ? This post discusses some of the available paths and roles within those paths to be able to make a living out of cybersecurity.
 
 My views are based on experience and those of friends and colleagues that have taken the various paths described below, however it is still a subjective view. If you disagree or want to add additional career paths or roles just [submit a pull-request](https://github.com/llmora/llmora.github.io/blob/master/_posts/2022-10-26-CareersInCyber.md), always happy to learn.
 
