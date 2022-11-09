@@ -82,6 +82,26 @@ var roles = [{
   description: ["Consultants see a lot of different challenges due to the variety of customers but seldomly stay long enough to see the implementation of their findings through. If you are tired of changing so much, a CISO career may give you that stability and the ability to change the security culture of the organisation from the ground up.", "Find an organisation that is interesting and that keeps throwing challenges at you, or you would become bored before you know it. Boredom is probably the main risk you will face in this role."],
   skills: ["Good broad knowledge of security", "Good selling and stakeholder management ability", "Always up to date with latest developments", "Can pivot to consultant if it fails", "Good technical knowledge a plus"]
 }, {
+  name: "Cybersecurity influencer",
+  path: "Consultancy",
+  years_learning: 1,
+  years_in_role: 5,
+  risk: 7,
+  fun: 7,
+  life: 7,
+  description: ["If you are a great communicator and know a lot of people in the cybersecurity world, a role as an influencer must be just for you. Moderating panels, participating in conferences and overall representing the visible side of cybersecurity wherever you go.", "The exposure that this role will give you can easily be channeled onto side businesses, e.g. consultancy or other engagement work."],
+  skills: ["Amazing ability to communicate", "Amazing ability to sell", "Networking", "Always up to date with latest developments", "Good security knowledge a plus"]
+}, {
+  name: "Cybersecurity public sector role",
+  path: "Consultancy",
+  years_learning: 1,
+  years_in_role: 30,
+  risk: 2,
+  fun: 3,
+  life: 5,
+  description: ["The private sector attracts most of the cybersecurity talent because it tends to be a faster path towards 'making' it, however public sector (Governments) have lots of positions to fill.", "If you choose this path do not expect to get the money you would get in the private sector, and be ready to deal with lots of politics. However the risk of failure is quite low and it should make for smooth sailing if you have the long-term commitment the role entails. As for satisfaction, you would be working in a role that has a direct impact on your community standing in the world, which probably offsets the reduced financial rewards."],
+  skills: ["Good broad knowledge of security", "Good selling and stakeholder management ability", "Must be able to tolerate politics", "Can pivot to consultant or CISO if it fails", "Good technical knowledge a plus"]
+}, {
   name: "Self-employed security consultant",
   path: "Consultancy",
   years_learning: 10,
@@ -163,30 +183,41 @@ var RoleCellRenderer = function () {
 var Roles = function (_React$Component2) {
   _inherits(Roles, _React$Component2);
 
-  function Roles() {
+  function Roles(props) {
     _classCallCheck(this, Roles);
 
-    return _possibleConstructorReturn(this, (Roles.__proto__ || Object.getPrototypeOf(Roles)).apply(this, arguments));
+    var _this2 = _possibleConstructorReturn(this, (Roles.__proto__ || Object.getPrototypeOf(Roles)).call(this, props));
+
+    _this2.state = { columnApi: null };
+    return _this2;
   }
 
   _createClass(Roles, [{
+    key: "componentDidUpdate",
+    value: function componentDidUpdate() {
+
+      if (this.state.columnApi) {
+        var allColumnIds = [];
+
+        this.state.columnApi.getColumns().forEach(function (column) {
+          allColumnIds.push(column.colId);
+        });
+
+        this.state.columnApi.autoSizeColumns(allColumnIds);
+
+        var defaultSortModel = [{ colId: 'years_learning', sort: 'desc', sortIndex: 0 }, { colId: 'years_in_role', sort: 'desc', sortIndex: 1 }];
+
+        this.state.columnApi.applyColumnState({ state: defaultSortModel });
+      }
+    }
+  }, {
     key: "onGridReady",
     value: function onGridReady(params) {
 
       var api = params.api;
       var columnApi = params.columnApi;
 
-      var allColumnIds = [];
-
-      columnApi.getColumns().forEach(function (column) {
-        allColumnIds.push(column.colId);
-      });
-
-      columnApi.autoSizeColumns(allColumnIds);
-
-      var defaultSortModel = [{ colId: 'years_learning', sort: 'desc', sortIndex: 0 }, { colId: 'years_in_role', sort: 'desc', sortIndex: 1 }];
-
-      params.columnApi.applyColumnState({ state: defaultSortModel });
+      this.setState({ columnApi: params.columnApi });
     }
   }, {
     key: "roleNameRenderer",
@@ -204,7 +235,7 @@ var Roles = function (_React$Component2) {
         field: "years_working",
         headerName: "Working time to USD 1M",
         initialWidth: 100
-      }, { field: "risk", headerName: "Risk of failure" }, { field: "fun" }, { field: "life", headerName: "Life balance" }];
+      }, { field: "risk", headerName: "Risk of failure" }, { field: "fun", headerName: "Fun level" }, { field: "life", headerName: "Life balance" }];
 
       var defaultColumnDefinition = {
         editable: false,
@@ -237,7 +268,7 @@ var Roles = function (_React$Component2) {
         "div",
         { className: "ag-theme-alpine", style: { width: "100%" } },
         React.createElement(AgGridReact.AgGridReact, {
-          onGridReady: this.onGridReady,
+          onGridReady: this.onGridReady.bind(this),
           rowData: rowData,
           columnDefs: columnDefinitions,
           domLayout: "autoHeight",

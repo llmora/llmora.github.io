@@ -149,6 +149,48 @@ const roles = [
   },
 
   {
+    name: "Cybersecurity influencer",
+    path: "Consultancy",
+    years_learning: 1,
+    years_in_role: 5,
+    risk: 7,
+    fun: 7,
+    life: 7,
+    description: [
+      "If you are a great communicator and know a lot of people in the cybersecurity world, a role as an influencer must be just for you. Moderating panels, participating in conferences and overall representing the visible side of cybersecurity wherever you go.",
+      "The exposure that this role will give you can easily be channeled onto side businesses, e.g. consultancy or other engagement work.",
+    ],
+    skills: [
+      "Amazing ability to communicate",
+      "Amazing ability to sell",
+      "Networking",
+      "Always up to date with latest developments",
+      "Good security knowledge a plus",
+    ],
+  },
+
+  {
+    name: "Cybersecurity public sector role",
+    path: "Consultancy",
+    years_learning: 1,
+    years_in_role: 30,
+    risk: 2,
+    fun: 3,
+    life: 5,
+    description: [
+      "The private sector attracts most of the cybersecurity talent because it tends to be a faster path towards 'making' it, however public sector (Governments) have lots of positions to fill.",
+      "If you choose this path do not expect to get the money you would get in the private sector, and be ready to deal with lots of politics. However the risk of failure is quite low and it should make for smooth sailing if you have the long-term commitment the role entails. As for satisfaction, you would be working in a role that has a direct impact on your community standing in the world, which probably offsets the reduced financial rewards.",
+    ],
+    skills: [
+      "Good broad knowledge of security",
+      "Good selling and stakeholder management ability",
+      "Must be able to tolerate politics",
+      "Can pivot to consultant or CISO if it fails",
+      "Good technical knowledge a plus",
+    ],
+  },
+
+  {
     name: "Self-employed security consultant",
     path: "Consultancy",
     years_learning: 10,
@@ -232,25 +274,40 @@ class RoleCellRenderer {
 }
 
 class Roles extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = { columnApi: null }
+  }
+
+  componentDidUpdate() {
+
+    if(this.state.columnApi) {
+      var allColumnIds = [];
+
+      this.state.columnApi.getColumns().forEach(function (column) {
+        allColumnIds.push(column.colId);
+      });
+  
+      this.state.columnApi.autoSizeColumns(allColumnIds);
+  
+      var defaultSortModel = [
+        { colId: 'years_learning', sort: 'desc', sortIndex: 0 },
+        { colId: 'years_in_role', sort: 'desc', sortIndex: 1 },
+      ];
+  
+      this.state.columnApi.applyColumnState({ state: defaultSortModel });
+  
+    }
+
+  }
+
   onGridReady(params) {
 
     const api = params.api;
     const columnApi = params.columnApi;
 
-    var allColumnIds = [];
+    this.setState({columnApi: params.columnApi})
 
-    columnApi.getColumns().forEach(function (column) {
-      allColumnIds.push(column.colId);
-    });
-
-    columnApi.autoSizeColumns(allColumnIds);
-
-    var defaultSortModel = [
-      { colId: 'years_learning', sort: 'desc', sortIndex: 0 },
-      { colId: 'years_in_role', sort: 'desc', sortIndex: 1 },
-    ];
-
-    params.columnApi.applyColumnState({ state: defaultSortModel });
   }
 
   roleNameRenderer(params) {
@@ -272,7 +329,7 @@ class Roles extends React.Component {
         initialWidth: 100
       },
       { field: "risk", headerName: "Risk of failure" },
-      { field: "fun" },
+      { field: "fun", headerName: "Fun level" },
       { field: "life", headerName: "Life balance" },
     ];
 
@@ -306,7 +363,7 @@ class Roles extends React.Component {
     return (
       <div className="ag-theme-alpine" style={{ width: "100%" }}>
         <AgGridReact.AgGridReact
-          onGridReady={this.onGridReady}
+          onGridReady={this.onGridReady.bind(this)}
           rowData={rowData}
           columnDefs={columnDefinitions}
           domLayout={"autoHeight"}
