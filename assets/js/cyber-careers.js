@@ -10,8 +10,6 @@ function _inherits(subClass, superClass) { if (typeof superClass !== "function" 
 
 var e = React.createElement;
 
-var defaultPriority = "time";
-
 var paths = [{
   name: "Technical",
   description: ["If you like to get your hands dirty, build and break things and are a techie at heart this is your path. Good honest work, you get out what you put in and with a need of minimal interaction with others, including no management work.", "To walk this path you must excel technically in your area of interest, and that requires a serious investment in learning time."]
@@ -63,7 +61,6 @@ var roles = [{
   life: 3,
   description: ["Bringing a product to life that solves a problem you really care about, that will make the world a better place and that only you are capable of delivering. What could be more purposeful?", "It will take a few years to find the right product, convince people to share your views and -with a bit of luck and no shortage of struggles- you will come out successful on the other side. The majority of startups fail, so you are likely to spend quite a few years repurposing yourself, but with every failure there will be new learnings that get you closer to success.", "Being a founder is not for the faint of heart and requires a long-term investment, but it is certainly one of the more satisfying and lucrative ways to make it in cyber."],
   skills: ["Amazing understanding of the problem area you solve", "Amazing selling ability", "Networking", "Always up to date with latest developments", "Development knowledge", "Ability to attract investment and talent"]
-
 }, {
   name: "Bug bounty researcher",
   path: "Technical",
@@ -84,7 +81,6 @@ var roles = [{
   life: 6,
   description: ["Consultants see a lot of different challenges due to the variety of customers but seldomly stay long enough to see the implementation of their findings through. If you are tired of changing so much, a CISO career may give you that stability and the ability to change the security culture of the organisation from the ground up.", "Find an organisation that is interesting and that keeps throwing challenges at you, or you would become bored before you know it. Boredom is probably the main risk you will face in this role."],
   skills: ["Good broad knowledge of security", "Good selling and stakeholder management ability", "Always up to date with latest developments", "Can pivot to consultant if it fails", "Good technical knowledge a plus"]
-
 }, {
   name: "Self-employed security consultant",
   path: "Consultancy",
@@ -115,57 +111,16 @@ var RoleMatrix = function (_React$Component) {
   function RoleMatrix(props) {
     _classCallCheck(this, RoleMatrix);
 
-    var _this = _possibleConstructorReturn(this, (RoleMatrix.__proto__ || Object.getPrototypeOf(RoleMatrix)).call(this, props));
-
-    _this.state = { roles: _this.orderRoles(roles, defaultPriority) };
-    return _this;
+    return _possibleConstructorReturn(this, (RoleMatrix.__proto__ || Object.getPrototypeOf(RoleMatrix)).call(this, props));
   }
 
   _createClass(RoleMatrix, [{
-    key: "orderRoles",
-    value: function orderRoles(roles, priority) {
-      var compareFunction = function compareFunction(a, b) {
-        return a.years_learning + a.years_in_role - (b.years_learning + b.years_in_role);
-      };
-
-      switch (priority) {
-        case "derisk":
-          compareFunction = function compareFunction(a, b) {
-            return a.risk - b.risk;
-          };
-          break;
-
-        case "fun":
-          compareFunction = function compareFunction(a, b) {
-            return b.fun - a.fun;
-          };
-          break;
-
-        case "life":
-          compareFunction = function compareFunction(a, b) {
-            return b.life - a.life;
-          };
-          break;
-      }
-
-      return roles.sort(compareFunction);
-    }
-  }, {
-    key: "setRoles",
-    value: function setRoles(priority) {
-      this.setState({ roles: this.orderRoles(this.state.roles, priority) });
-    }
-  }, {
     key: "render",
     value: function render() {
       return React.createElement(
         "div",
         null,
-        React.createElement(
-          Filter,
-          { setRoles: this.setRoles.bind(this) },
-          React.createElement(Roles, { roles: this.state.roles, defaultPriority: defaultPriority })
-        )
+        React.createElement(Roles, { roles: roles })
       );
     }
   }]);
@@ -173,74 +128,40 @@ var RoleMatrix = function (_React$Component) {
   return RoleMatrix;
 }(React.Component);
 
-var Filter = function (_React$Component2) {
-  _inherits(Filter, _React$Component2);
-
-  function Filter(props) {
-    _classCallCheck(this, Filter);
-
-    var _this2 = _possibleConstructorReturn(this, (Filter.__proto__ || Object.getPrototypeOf(Filter)).call(this, props));
-
-    _this2.state = { value: _this2.props.defaultPriority };
-
-    _this2.handleChange = _this2.handleChange.bind(_this2);
-    return _this2;
+var RoleCellRenderer = function () {
+  function RoleCellRenderer() {
+    _classCallCheck(this, RoleCellRenderer);
   }
 
-  _createClass(Filter, [{
-    key: "handleChange",
-    value: function handleChange(event) {
-      this.setState({ value: event.target.value });
-      this.props.setRoles(event.target.value);
+  _createClass(RoleCellRenderer, [{
+    key: "init",
+
+    // init method gets the details of the cell to be renderer
+    value: function init(params) {
+
+      var roleLink = params.value.toLowerCase().replace(new RegExp(/\s+/gi), "-");
+
+      this.eGui = document.createElement('a');
+      this.eGui.href = "#" + roleLink;
+      this.eGui.innerHTML = "<strong>" + params.value + "<strong>";
     }
   }, {
-    key: "render",
-    value: function render() {
-      return React.createElement(
-        "div",
-        null,
-        React.createElement(
-          "div",
-          null,
-          React.createElement(
-            "select",
-            { onChange: this.handleChange },
-            React.createElement(
-              "option",
-              { value: "time" },
-              "Shortest time"
-            ),
-            React.createElement(
-              "option",
-              { value: "derisk" },
-              "Less risk"
-            ),
-            React.createElement(
-              "option",
-              { value: "fun" },
-              "More fun"
-            ),
-            React.createElement(
-              "option",
-              { value: "life" },
-              "More life"
-            )
-          )
-        ),
-        React.createElement(
-          "div",
-          null,
-          this.props.children
-        )
-      );
+    key: "getGui",
+    value: function getGui() {
+      return this.eGui;
+    }
+  }, {
+    key: "refresh",
+    value: function refresh(params) {
+      return false;
     }
   }]);
 
-  return Filter;
-}(React.Component);
+  return RoleCellRenderer;
+}();
 
-var Roles = function (_React$Component3) {
-  _inherits(Roles, _React$Component3);
+var Roles = function (_React$Component2) {
+  _inherits(Roles, _React$Component2);
 
   function Roles() {
     _classCallCheck(this, Roles);
@@ -249,146 +170,80 @@ var Roles = function (_React$Component3) {
   }
 
   _createClass(Roles, [{
+    key: "onGridReady",
+    value: function onGridReady(params) {
+
+      var api = params.api;
+      var columnApi = params.columnApi;
+
+      var allColumnIds = [];
+
+      columnApi.getColumns().forEach(function (column) {
+        allColumnIds.push(column.colId);
+      });
+
+      columnApi.autoSizeColumns(allColumnIds);
+
+      var defaultSortModel = [{ colId: 'years_learning', sort: 'desc', sortIndex: 0 }, { colId: 'years_in_role', sort: 'desc', sortIndex: 1 }];
+
+      params.columnApi.applyColumnState({ state: defaultSortModel });
+    }
+  }, {
+    key: "roleNameRenderer",
+    value: function roleNameRenderer(params) {
+      return "<span>" + params.value + "</span>";
+    }
+  }, {
     key: "render",
     value: function render() {
-      var entries = [];
+      var columnDefinitions = [{ field: "name", headerName: "Role", cellRenderer: RoleCellRenderer }, { field: "path" }, {
+        field: "years_learning",
+        headerName: "Learning time",
+        initialWidth: 100
+      }, {
+        field: "years_working",
+        headerName: "Working time to USD 1M",
+        initialWidth: 100
+      }, { field: "risk", headerName: "Risk of failure" }, { field: "fun" }, { field: "life", headerName: "Life balance" }];
+
+      var defaultColumnDefinition = {
+        editable: false,
+        resizable: true,
+        sortable: true,
+        wrapHeaderText: true,
+        autoHeaderHeight: true
+      };
+
+      var rowData = [];
 
       if (this.props.roles) {
-        entries = this.props.roles.map(function (role, idx) {
-          var a = new RegExp(/\s+/gi);
-          var roleLink = role.name.toLowerCase().replace(a, "-");
+        rowData = this.props.roles.map(function (role, idx) {
 
-          return React.createElement(
-            "tr",
-            { key: idx },
-            React.createElement(
-              "td",
-              null,
-              React.createElement(
-                "a",
-                { href: "#" + roleLink },
-                React.createElement(
-                  "strong",
-                  null,
-                  role.name
-                )
-              )
-            ),
-            React.createElement(
-              "td",
-              null,
-              role.path
-            ),
-            React.createElement(
-              "td",
-              null,
-              role.years_learning,
-              " years"
-            ),
-            React.createElement(
-              "td",
-              null,
-              role.years_in_role,
-              " years"
-            ),
-            React.createElement(
-              "td",
-              null,
-              role.risk
-            ),
-            React.createElement(
-              "td",
-              null,
-              role.fun
-            ),
-            React.createElement(
-              "td",
-              null,
-              role.life
-            )
-          );
+          var roleData = {
+            name: role.name,
+            path: role.path,
+            years_learning: role.years_learning + " years",
+            years_working: role.years_in_role + " years",
+            risk: role.risk,
+            fun: role.fun,
+            life: role.life
+          };
+
+          return roleData;
         });
       }
 
       return React.createElement(
-        "table",
-        { className: "table table-striped table-hover table-bordered" },
-        React.createElement(
-          "thead",
-          { className: "table-dark" },
-          React.createElement(
-            "tr",
-            null,
-            React.createElement(
-              "th",
-              null,
-              React.createElement(
-                "strong",
-                null,
-                "Role"
-              )
-            ),
-            React.createElement(
-              "th",
-              null,
-              React.createElement(
-                "strong",
-                null,
-                "Path"
-              )
-            ),
-            React.createElement(
-              "th",
-              null,
-              React.createElement(
-                "strong",
-                null,
-                "How long to acquire skills needed?"
-              )
-            ),
-            React.createElement(
-              "th",
-              null,
-              React.createElement(
-                "strong",
-                null,
-                "How quick to make $1M once you have skills?"
-              )
-            ),
-            React.createElement(
-              "th",
-              null,
-              React.createElement(
-                "strong",
-                null,
-                "Risk of failure"
-              )
-            ),
-            React.createElement(
-              "th",
-              null,
-              React.createElement(
-                "strong",
-                null,
-                "Fun"
-              )
-            ),
-            React.createElement(
-              "th",
-              null,
-              React.createElement(
-                "strong",
-                null,
-                "Life balance"
-              )
-            )
-          )
-        ),
-        React.createElement(
-          "tbody",
-          { className: "table-group-divider" },
-          entries
-        )
+        "div",
+        { className: "ag-theme-alpine", style: { width: "100%" } },
+        React.createElement(AgGridReact.AgGridReact, {
+          onGridReady: this.onGridReady,
+          rowData: rowData,
+          columnDefs: columnDefinitions,
+          domLayout: "autoHeight",
+          defaultColDef: defaultColumnDefinition,
+          animateRows: true
+        })
       );
     }
   }]);
@@ -398,16 +253,16 @@ var Roles = function (_React$Component3) {
 
 /**** Article *****/
 
-var RoleArticle = function (_React$Component4) {
-  _inherits(RoleArticle, _React$Component4);
+var RoleArticle = function (_React$Component3) {
+  _inherits(RoleArticle, _React$Component3);
 
   function RoleArticle(props) {
     _classCallCheck(this, RoleArticle);
 
-    var _this4 = _possibleConstructorReturn(this, (RoleArticle.__proto__ || Object.getPrototypeOf(RoleArticle)).call(this, props));
+    var _this3 = _possibleConstructorReturn(this, (RoleArticle.__proto__ || Object.getPrototypeOf(RoleArticle)).call(this, props));
 
-    _this4.state = { paths: paths, roles: roles };
-    return _this4;
+    _this3.state = { paths: paths, roles: roles };
+    return _this3;
   }
 
   _createClass(RoleArticle, [{
@@ -450,9 +305,11 @@ var RoleArticle = function (_React$Component4) {
             React.createElement(
               "div",
               { className: "mb-3" },
-              "The following ",
+              "The following",
+              " ",
               rolesForPath.length > 1 ? rolesForPath.length + " roles follow" : "role follows",
-              " this path:"
+              " ",
+              "this path:"
             ),
             React.createElement(RolesForPath, { roles: rolesForPath })
           );
@@ -470,8 +327,8 @@ var RoleArticle = function (_React$Component4) {
   return RoleArticle;
 }(React.Component);
 
-var RolesForPath = function (_React$Component5) {
-  _inherits(RolesForPath, _React$Component5);
+var RolesForPath = function (_React$Component4) {
+  _inherits(RolesForPath, _React$Component4);
 
   function RolesForPath(props) {
     _classCallCheck(this, RolesForPath);
@@ -501,8 +358,8 @@ var RolesForPath = function (_React$Component5) {
   return RolesForPath;
 }(React.Component);
 
-var PathRole = function (_React$Component6) {
-  _inherits(PathRole, _React$Component6);
+var PathRole = function (_React$Component5) {
+  _inherits(PathRole, _React$Component5);
 
   function PathRole(props) {
     _classCallCheck(this, PathRole);
@@ -559,19 +416,28 @@ var PathRole = function (_React$Component6) {
                 null,
                 " "
               ),
-              role.risk > 5 && React.createElement("i", { className: "bi bi-exclamation-triangle-fill text-danger", title: "Very risky" }),
+              role.risk > 5 && React.createElement("i", {
+                className: "bi bi-exclamation-triangle-fill text-danger",
+                title: "Very risky"
+              }),
               React.createElement(
                 "span",
                 null,
                 " "
               ),
-              role.fun > 5 && React.createElement("i", { className: "bi bi-emoji-laughing-fill text-info", title: "Lots of fun" }),
+              role.fun > 5 && React.createElement("i", {
+                className: "bi bi-emoji-laughing-fill text-info",
+                title: "Lots of fun"
+              }),
               React.createElement(
                 "span",
                 null,
                 " "
               ),
-              role.life > 5 && React.createElement("i", { className: "bi bi-people-fill text-success", title: "Good life balance" })
+              role.life > 5 && React.createElement("i", {
+                className: "bi bi-people-fill text-success",
+                title: "Good life balance"
+              })
             )
           )
         ),
@@ -581,7 +447,10 @@ var PathRole = function (_React$Component6) {
           description,
           React.createElement(
             "div",
-            { className: "my-3", style: { display: "flex", justifyContent: "space-between" } },
+            {
+              className: "my-3",
+              style: { display: "flex", justifyContent: "space-between" }
+            },
             skills
           )
         )

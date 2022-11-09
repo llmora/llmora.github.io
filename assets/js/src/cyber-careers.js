@@ -2,8 +2,6 @@
 
 const e = React.createElement;
 
-const defaultPriority = "time";
-
 const paths = [
   {
     name: "Technical",
@@ -107,7 +105,6 @@ const roles = [
       "Development knowledge",
       "Ability to attract investment and talent",
     ],
-
   },
 
   {
@@ -149,7 +146,6 @@ const roles = [
       "Can pivot to consultant if it fails",
       "Good technical knowledge a plus",
     ],
-
   },
 
   {
@@ -202,126 +198,122 @@ const roles = [
 class RoleMatrix extends React.Component {
   constructor(props) {
     super(props);
-    this.state = { roles: this.orderRoles(roles, defaultPriority) };
-  }
-
-  orderRoles(roles, priority) {
-    var compareFunction = function (a, b) {
-      return (
-        a.years_learning +
-        a.years_in_role -
-        (b.years_learning + b.years_in_role)
-      );
-    };
-
-    switch (priority) {
-      case "derisk":
-        compareFunction = function (a, b) {
-          return a.risk - b.risk;
-        };
-        break;
-
-      case "fun":
-        compareFunction = function (a, b) {
-          return b.fun - a.fun;
-        };
-        break;
-
-      case "life":
-        compareFunction = function (a, b) {
-          return b.life - a.life;
-        };
-        break;
-    }
-
-    return roles.sort(compareFunction);
-  }
-
-  setRoles(priority) {
-    this.setState({ roles: this.orderRoles(this.state.roles, priority) });
   }
 
   render() {
     return (
       <div>
-        <Filter setRoles={this.setRoles.bind(this)}>
-          <Roles roles={this.state.roles} defaultPriority={defaultPriority} />
-        </Filter>
+        <Roles roles={roles} />
       </div>
     );
   }
 }
 
-class Filter extends React.Component {
-  constructor(props) {
-    super(props);
-    this.state = { value: this.props.defaultPriority };
+class RoleCellRenderer {
+  // init method gets the details of the cell to be renderer
+  init(params) {
 
-    this.handleChange = this.handleChange.bind(this);
+    let roleLink = params.value
+    .toLowerCase()
+    .replace(new RegExp(/\s+/gi), "-");
+
+    this.eGui = document.createElement('a'); 
+    this.eGui.href = `#${roleLink}`
+    this.eGui.innerHTML = `<strong>${params.value}<strong>`;
   }
 
-  handleChange(event) {
-    this.setState({ value: event.target.value });
-    this.props.setRoles(event.target.value);
+  getGui() {
+    return this.eGui;
   }
 
-  render() {
-    return (
-      <div>
-        <div>
-          <select onChange={this.handleChange}>
-            <option value="time">Shortest time</option>
-            <option value="derisk">Less risk</option>
-            <option value="fun">More fun</option>
-            <option value="life">More life</option>
-          </select>
-        </div>
-        <div>{this.props.children}</div>
-      </div>
-    );
+  refresh(params) {
+    return false;
   }
 }
 
 class Roles extends React.Component {
+  onGridReady(params) {
+
+    const api = params.api;
+    const columnApi = params.columnApi;
+
+    var allColumnIds = [];
+
+    columnApi.getColumns().forEach(function (column) {
+      allColumnIds.push(column.colId);
+    });
+
+    columnApi.autoSizeColumns(allColumnIds);
+
+    var defaultSortModel = [
+      { colId: 'years_learning', sort: 'desc', sortIndex: 0 },
+      { colId: 'years_in_role', sort: 'desc', sortIndex: 1 },
+    ];
+
+    params.columnApi.applyColumnState({ state: defaultSortModel });
+  }
+
+  roleNameRenderer(params) {
+    return `<span>${params.value}</span>`;
+  }
+
   render() {
-    let entries = [];
+    const columnDefinitions = [
+      { field: "name", headerName: "Role", cellRenderer: RoleCellRenderer},
+      { field: "path" },
+      {
+        field: "years_learning",
+        headerName: "Learning time",
+        initialWidth: 100
+      },
+      {
+        field: "years_working",
+        headerName: "Working time to USD 1M",
+        initialWidth: 100
+      },
+      { field: "risk", headerName: "Risk of failure" },
+      { field: "fun" },
+      { field: "life", headerName: "Life balance" },
+    ];
+
+    const defaultColumnDefinition = {
+      editable: false,
+      resizable: true,
+      sortable: true,
+      wrapHeaderText: true,
+      autoHeaderHeight: true
+    };
+
+    let rowData = [];
 
     if (this.props.roles) {
-      entries = this.props.roles.map(function (role, idx) {
-        let a = new RegExp(/\s+/gi);
-        let roleLink = role.name.toLowerCase().replace(a, "-");
+      rowData = this.props.roles.map(function (role, idx) {
 
-        return (
-          <tr key={idx}>
-            <td>
-              <a href={`#${roleLink}`}><strong>{role.name}</strong></a>
-            </td>
-            <td>{role.path}</td>
-            <td>{role.years_learning} years</td>
-            <td>{role.years_in_role} years</td>
-            <td>{role.risk}</td>
-            <td>{role.fun}</td>
-            <td>{role.life}</td>
-          </tr>
-        );
+        let roleData = {
+          name: role.name,
+          path: role.path,
+          years_learning: `${role.years_learning} years`,
+          years_working: `${role.years_in_role} years`,
+          risk: role.risk,
+          fun: role.fun,
+          life: role.life,
+        };
+
+        return roleData;
       });
     }
 
     return (
-      <table className="table table-striped table-hover table-bordered">  
-        <thead className="table-dark">
-          <tr>
-            <th><strong>Role</strong></th>
-            <th><strong>Path</strong></th>
-            <th><strong>How long to acquire skills needed?</strong></th>
-            <th><strong>How quick to make $1M once you have skills?</strong></th>
-            <th><strong>Risk of failure</strong></th>
-            <th><strong>Fun</strong></th>
-            <th><strong>Life balance</strong></th>
-          </tr>
-        </thead>
-        <tbody className="table-group-divider">{entries}</tbody>
-      </table>
+      <div className="ag-theme-alpine" style={{ width: "100%" }}>
+        <AgGridReact.AgGridReact
+          onGridReady={this.onGridReady}
+          rowData={rowData}
+          columnDefs={columnDefinitions}
+          domLayout={"autoHeight"}
+          defaultColDef={defaultColumnDefinition}
+          animateRows={true}
+        ></AgGridReact.AgGridReact>
+      </div>
     );
   }
 }
@@ -351,13 +343,19 @@ class RoleArticle extends React.Component {
 
         let rolesForPath = roles.filter(function (role) {
           return role.path.toLowerCase() === path.name.toLowerCase();
-        })
+        });
 
         return (
           <div key={idx} className="pt-3">
             <h2>The {path.name.toLowerCase()} path</h2>
             <div>{description}</div>
-            <div className="mb-3">The following {rolesForPath.length > 1? `${rolesForPath.length} roles follow`: "role follows"} this path:</div>
+            <div className="mb-3">
+              The following{" "}
+              {rolesForPath.length > 1
+                ? `${rolesForPath.length} roles follow`
+                : "role follows"}{" "}
+              this path:
+            </div>
             <RolesForPath roles={rolesForPath} />
           </div>
         );
@@ -400,7 +398,11 @@ class PathRole extends React.Component {
 
     if (role.description) {
       description = role.description.map(function (descriptionParagraph, idx) {
-        return <p markdown="span" key={idx}>{descriptionParagraph}</p>;
+        return (
+          <p markdown="span" key={idx}>
+            {descriptionParagraph}
+          </p>
+        );
       });
     }
 
@@ -409,9 +411,9 @@ class PathRole extends React.Component {
     if (role.skills) {
       skills = role.skills.map(function (skill, idx) {
         return (
-            <span key={idx} className="badge text-bg-primary">
-              {skill}
-            </span>
+          <span key={idx} className="badge text-bg-primary">
+            {skill}
+          </span>
         );
       });
     }
@@ -423,18 +425,38 @@ class PathRole extends React.Component {
             <b>
               {role.name}
               <span> </span>
-              {role.risk > 5 && <i className="bi bi-exclamation-triangle-fill text-danger" title="Very risky"></i>}
+              {role.risk > 5 && (
+                <i
+                  className="bi bi-exclamation-triangle-fill text-danger"
+                  title="Very risky"
+                ></i>
+              )}
               <span> </span>
-              {role.fun > 5 && <i className="bi bi-emoji-laughing-fill text-info" title="Lots of fun"></i>}
+              {role.fun > 5 && (
+                <i
+                  className="bi bi-emoji-laughing-fill text-info"
+                  title="Lots of fun"
+                ></i>
+              )}
               <span> </span>
-              {role.life > 5 && <i className="bi bi-people-fill text-success" title="Good life balance"></i>}
+              {role.life > 5 && (
+                <i
+                  className="bi bi-people-fill text-success"
+                  title="Good life balance"
+                ></i>
+              )}
             </b>
           </h5>
         </div>
         <div className="card-body">
           {description}
 
-          <div className="my-3" style={{ display: "flex", justifyContent: "space-between" }}>{skills}</div>
+          <div
+            className="my-3"
+            style={{ display: "flex", justifyContent: "space-between" }}
+          >
+            {skills}
+          </div>
         </div>
       </div>
     );
