@@ -372,3 +372,21 @@ div.box p {
 .red {
   color: red;
 }
+
+// Tables
+
+table {
+  border-collapse: collapse;
+  border: 1px solid black;
+	text-align: center;
+	vertical-align: middle;
+}
+
+th, td {
+  border: 1px solid black;  
+  padding: 8px;
+}
+  
+thead th {
+  width: 15%;
+}
