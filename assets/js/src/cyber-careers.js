@@ -281,7 +281,19 @@ class Roles extends React.Component {
 
   componentDidUpdate() {
 
+  }
+
+  onGridReady(params) {
+
+    const api = params.api;
+    const columnApi = params.columnApi;
+
+    this.setState({columnApi: params.columnApi})
+  }
+
+  resizeAllColumns(evt) {
     if(this.state.columnApi) {
+
       var allColumnIds = [];
 
       this.state.columnApi.getColumns().forEach(function (column) {
@@ -297,14 +309,6 @@ class Roles extends React.Component {
       this.state.columnApi.applyColumnState({ state: defaultSortModel });
   
     }
-  }
-
-  onGridReady(params) {
-
-    const api = params.api;
-    const columnApi = params.columnApi;
-
-    this.setState({columnApi: params.columnApi})
 
   }
 
@@ -364,6 +368,7 @@ class Roles extends React.Component {
           domLayout={"autoHeight"}
           defaultColDef={defaultColumnDefinition}
           animateRows={true}
+          onFirstDataRendered={this.resizeAllColumns.bind(this)}
         ></AgGridReact.AgGridReact>
       </div>
     );

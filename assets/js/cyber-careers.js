@@ -192,9 +192,21 @@ var Roles = function (_React$Component2) {
 
   _createClass(Roles, [{
     key: "componentDidUpdate",
-    value: function componentDidUpdate() {
+    value: function componentDidUpdate() {}
+  }, {
+    key: "onGridReady",
+    value: function onGridReady(params) {
 
+      var api = params.api;
+      var columnApi = params.columnApi;
+
+      this.setState({ columnApi: params.columnApi });
+    }
+  }, {
+    key: "resizeAllColumns",
+    value: function resizeAllColumns(evt) {
       if (this.state.columnApi) {
+
         var allColumnIds = [];
 
         this.state.columnApi.getColumns().forEach(function (column) {
@@ -207,15 +219,6 @@ var Roles = function (_React$Component2) {
 
         this.state.columnApi.applyColumnState({ state: defaultSortModel });
       }
-    }
-  }, {
-    key: "onGridReady",
-    value: function onGridReady(params) {
-
-      var api = params.api;
-      var columnApi = params.columnApi;
-
-      this.setState({ columnApi: params.columnApi });
     }
   }, {
     key: "yearsCellRenderer",
@@ -269,7 +272,8 @@ var Roles = function (_React$Component2) {
           columnDefs: columnDefinitions,
           domLayout: "autoHeight",
           defaultColDef: defaultColumnDefinition,
-          animateRows: true
+          animateRows: true,
+          onFirstDataRendered: this.resizeAllColumns.bind(this)
         })
       );
     }
