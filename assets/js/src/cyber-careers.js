@@ -279,19 +279,13 @@ class Roles extends React.Component {
     this.state = { columnApi: null }
   }
 
-  componentDidUpdate() {
-
-  }
-
   onGridReady(params) {
 
-    const api = params.api;
-    const columnApi = params.columnApi;
-
-    this.setState({columnApi: params.columnApi})
+    this.setState({columnApi: params.columnApi, api: params.api})
   }
 
   resizeAllColumns(evt) {
+
     if(this.state.columnApi) {
 
       var allColumnIds = [];

@@ -191,20 +191,15 @@ var Roles = function (_React$Component2) {
   }
 
   _createClass(Roles, [{
-    key: "componentDidUpdate",
-    value: function componentDidUpdate() {}
-  }, {
     key: "onGridReady",
     value: function onGridReady(params) {
 
-      var api = params.api;
-      var columnApi = params.columnApi;
-
-      this.setState({ columnApi: params.columnApi });
+      this.setState({ columnApi: params.columnApi, api: params.api });
     }
   }, {
     key: "resizeAllColumns",
     value: function resizeAllColumns(evt) {
+
       if (this.state.columnApi) {
 
         var allColumnIds = [];
@@ -218,6 +213,10 @@ var Roles = function (_React$Component2) {
         var defaultSortModel = [{ colId: 'years', sort: 'asc', sortIndex: 0 }];
 
         this.state.columnApi.applyColumnState({ state: defaultSortModel });
+      }
+
+      if (this.state.api) {
+        //      this.state.api.sizeColumnsToFit();
       }
     }
   }, {
