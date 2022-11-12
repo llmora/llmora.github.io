@@ -1,0 +1,28 @@
+{
+  "name": "llmora.github.io",
+  "version": "1.0.0",
+  "description": "> March, 2016: If you're on an old version of Jekyll Now and run into a) build warnings or b) syntax highlighting issues caused by [Jekyll 3 and GitHub Pages updates](https://github.com/blog/2100-github-pages-now-faster-and-simpler-with-jekyll-3-0), just :sparkles:[update your _config.yml](https://github.com/barryclark/jekyll-now/pull/445/files):sparkles: and you'll be set!",
+  "main": "index.js",
+  "directories": {
+    "test": "test"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "tsbuild": "cd assets/js && npx babel --watch src --out-dir . --presets react-app/prod"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/llmora/llmora.github.io.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/llmora/llmora.github.io/issues"
+  },
+  "homepage": "https://github.com/llmora/llmora.github.io#readme",
+  "dependencies": {
+    "babel-cli": "^6.26.0",
+    "babel-preset-react-app": "^3.1.2"
+  }
+}

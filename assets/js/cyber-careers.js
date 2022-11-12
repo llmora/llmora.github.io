@@ -214,10 +214,6 @@ var Roles = function (_React$Component2) {
 
         this.state.columnApi.applyColumnState({ state: defaultSortModel });
       }
-
-      if (this.state.api) {
-        //      this.state.api.sizeColumnsToFit();
-      }
     }
   }, {
     key: "yearsCellRenderer",
