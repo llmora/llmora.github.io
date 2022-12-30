@@ -47,6 +47,8 @@ When somebody purchases a batch, the tokens are shipped from a warehouse and the
 
 What would be your guess if you had to venture a reason why they kept a copy of the token seeds?
 
+*Updated Dec'2022: Mihai commented on this point (thanks!) and put forward the proposal of RSA keeping a copy of the seeds for customers who lose them, and they may not be too far off: an [article published 10 years after the hack](https://www.wired.com/story/the-full-story-of-the-stunning-rsa-hack-can-finally-be-told/) reveals the following nugget of information: "Even after the CD was shipped to a client, those seeds remained on the seed warehouse server as a backup if the customer’s SecurID server or its setup CD were somehow corrupted."*
+
 ## Token manufacture
 
 Because the token arrives with the seed preloaded it needs to be programmed before it gets to us.
